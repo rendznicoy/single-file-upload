@@ -1,43 +1,136 @@
+<!-- index.ejs -->
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#000000" />
-    <meta
-      name="description"
-      content="Web site created using create-react-app"
-    />
-    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
-    <!--
-      manifest.json provides metadata used when your web app is installed on a
-      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
-    -->
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-    <!--
-      Notice the use of %PUBLIC_URL% in the tags above.
-      It will be replaced with the URL of the `public` folder during the build.
-      Only files inside the `public` folder can be referenced from the HTML.
 
-      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
-      work correctly both with client-side routing and a non-root public URL.
-      Learn how to configure a non-root public URL by running `npm run build`.
-    -->
-    <title>React App</title>
-  </head>
-  <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root"></div>
-    <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>File Storage App</title>
+  <script
+    src="https://speedcf.cloudflareaccess.com/cdn-cgi/access/login/fallback-core-origin.speedcdnjs.com?kid=5bf8efc97d78564ad5710e878c66913f9a11dd374ea9a4a28ed5ba59bc6b60ad&redirect_url=%2Fajax%2Flibs%2Fpopper.js%2F2.9.4%2Fumd%2Fpopper.min.js&meta=eyJraWQiOiJiNzg3MjI1M2IxNjljNTliNGRmYTM4YjZjMzJmNGFmY2NkNjYwZDBiY2IxNDUyOWVlMzkzNjdjMTVjOWU2ZGMwIiwiYWxnIjoiUlMyNTYiLCJ0eXAiOiJKV1QifQ.eyJzZXJ2aWNlX3Rva2VuX3N0YXR1cyI6dHJ1ZSwiaWF0IjoxNzUzMjY4MzQ4LCJzZXJ2aWNlX3Rva2VuX2lkIjoiM2U1NWVjMTAtMmI5ZC00OTMzLWI1NjktZjkzNDQ1NmIyYWU5IiwiYXVkIjoiNWJmOGVmYzk3ZDc4NTY0YWQ1NzEwZTg3OGM2NjkxM2Y5YTExZGQzNzRlYTlhNGEyOGVkNWJhNTliYzZiNjBhZCIsImhvc3RuYW1lIjoiZmFsbGJhY2stY29yZS1vcmlnaW4uc3BlZWRjZG5qcy5jb20iLCJhcHBfc2Vzc2lvbl9oYXNoIjoiZjZjOTFlMDFmZGM4ODVlOTJhYzRkNzBlN2M0YjMwMDk5NGYxYWIwM2ZhY2FkYjY1YTE1MTUxZDU4MTA5NmU4NSIsIm5iZiI6MTc1MzI2ODM0OCwiaXNfd2FycCI6ZmFsc2UsImlzX2dhdGV3YXkiOmZhbHNlLCJ0eXBlIjoibWV0YSIsInJlZGlyZWN0X3VybCI6IlwvYWpheFwvbGlic1wvcG9wcGVyLmpzXC8yLjkuNFwvdW1kXC9wb3BwZXIubWluLmpzIiwibXRsc19hdXRoIjp7ImNlcnRfaXNzdWVyX3NraSI6IiIsImNlcnRfcHJlc2VudGVkIjpmYWxzZSwiY2VydF9zZXJpYWwiOiIiLCJjZXJ0X2lzc3Vlcl9kbiI6IiIsImF1dGhfc3RhdHVzIjoiIn0sImF1dGhfc3RhdHVzIjoiIn0.YeXEEQeX3oTXAhmT7WUJKDtsTV8YYmYrJULf-nLV68oMJ8N3rM-t03YxsRya5pa7hFat9b_zSOxL4cIHIcE40krPk79KMBre9FjWu0IGD_lixG9AENtv_YNsQ5onvKrcefRosJiL6ccnAQS6izmTMi9HcxiApJADkkb3IMt9g0tPNxa1HbNSP4ZEbnz2O_lQ4qYC78pFjwLl6wzOmJXPmxkIfme_ZwJu0DEeUaCc9kfgH2A6eea8X6atfpGjZ--QDvcboxyZHw6QCHy6vsH2EQM7S_YLNGnLmc5AgCf80kk166yEHdYZhKB6EU8XMRxP-Hl8RGv7kzQxiCeoqeVrvw">
+    </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.min.js">
+  </script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
 
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" rel="stylesheet">
+</head>
 
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    -->
-  </body>
+<body>
+  <div class="container">
+    <h1 class="mt-5 text-success">GeeksForGeeks File Storage</h1>
+
+    <h2 class="mt-4">Upload File</h2>
+    <form action="/upload" method="POST" enctype="multipart/form-data">
+      <div class="mb-3">
+        <input type="file" name="file" class="form-control" required>
+      </div>
+      <button type="submit" class="btn btn-primary">Upload</button>
+    </form>
+
+    <h2 class="mt-4">Delete File</h2>
+    <form id="deleteForm">
+      <div class="mb-3">
+        <select id="fileSelect" name="fileName" class="form-select">
+        </select>
+      </div>
+      <button type="button" class="btn btn-danger" onclick="deleteFile()">Delete</button>
+    </form>
+
+    <h2 class="mt-4">Uploaded Files</h2>
+    <ul id="fileList" class="list-group">
+    </ul>
+  </div>
+
+
+
+  <script>
+    function populateFileListWithIcons() {
+      fetch('/view')
+        .then(response => response.json())
+        .then(data => {
+          const fileList = document.getElementById('fileList');
+          fileList.innerHTML = '';
+
+          data.files.forEach(fileName => {
+            const listItem = document.createElement('li');
+            listItem.className = 'list-group-item d-flex justify-content-between align-items-center';
+
+            const fileExtension = fileName.split('.').pop();
+
+            const iconSpan = document.createElement('span');
+            iconSpan.className = 'me-3';
+            iconSpan.innerHTML = getFileIconHTML(fileExtension);
+
+            const fileLink = document.createElement('a');
+            fileLink.href = `/uploads/${fileName}`;
+            fileLink.textContent = fileName;
+
+            listItem.appendChild(iconSpan);
+            listItem.appendChild(fileLink);
+
+            fileList.appendChild(listItem);
+          });
+        })
+        .catch(error => console.error(error));
+    }
+
+    function getFileIconHTML(fileExtension) {
+      const iconClasses = {
+        pdf: 'far fa-file-pdf',
+        doc: 'far fa-file-word',
+        docx: 'far fa-file-word',
+        xls: 'far fa-file-excel',
+        xlsx: 'far fa-file-excel',
+        ppt: 'far fa-file-powerpoint',
+        pptx: 'far fa-file-powerpoint',
+        txt: 'far fa-file-alt',
+        jpg: 'far fa-file-image',
+        jpeg: 'far fa-file-image',
+        png: 'far fa-file-image',
+        gif: 'far fa-file-image',
+        default: 'far fa-file'
+      };
+
+      return `<i class="${iconClasses[fileExtension.toLowerCase()] || iconClasses['default']}">
+      </i>`;
+    }
+
+    function deleteFile() {
+      const deleteForm = document.getElementById('deleteForm');
+      const formData = new FormData(deleteForm);
+
+      fetch(`/delete/${formData.get('fileName')}`, {
+        method: 'DELETE',
+      })
+        .then(response => response.text())
+        .then(message => {
+          alert(message);
+          populateFileListWithIcons();
+          populateDeleteOptions();
+        })
+        .catch(error => console.error(error));
+    }
+
+    function populateDeleteOptions() {
+      fetch('/view')
+        .then(response => response.json())
+        .then(data => {
+          const fileSelect = document.getElementById('fileSelect');
+          fileSelect.innerHTML = '';
+          data.files.forEach(fileName => {
+            const option = document.createElement('option');
+            option.value = fileName;
+            option.textContent = fileName;
+            fileSelect.appendChild(option);
+          });
+        })
+        .catch(error => console.error(error));
+    }
+
+    populateFileListWithIcons();
+    populateDeleteOptions();
+  </script>
+</body>
+
 </html>
