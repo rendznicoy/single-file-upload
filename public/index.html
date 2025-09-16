@@ -1,4 +1,3 @@
-<!-- index.ejs -->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,130 +5,497 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>File Storage App</title>
-  <script
-    src="https://speedcf.cloudflareaccess.com/cdn-cgi/access/login/fallback-core-origin.speedcdnjs.com?kid=5bf8efc97d78564ad5710e878c66913f9a11dd374ea9a4a28ed5ba59bc6b60ad&redirect_url=%2Fajax%2Flibs%2Fpopper.js%2F2.9.4%2Fumd%2Fpopper.min.js&meta=eyJraWQiOiJiNzg3MjI1M2IxNjljNTliNGRmYTM4YjZjMzJmNGFmY2NkNjYwZDBiY2IxNDUyOWVlMzkzNjdjMTVjOWU2ZGMwIiwiYWxnIjoiUlMyNTYiLCJ0eXAiOiJKV1QifQ.eyJzZXJ2aWNlX3Rva2VuX3N0YXR1cyI6dHJ1ZSwiaWF0IjoxNzUzMjY4MzQ4LCJzZXJ2aWNlX3Rva2VuX2lkIjoiM2U1NWVjMTAtMmI5ZC00OTMzLWI1NjktZjkzNDQ1NmIyYWU5IiwiYXVkIjoiNWJmOGVmYzk3ZDc4NTY0YWQ1NzEwZTg3OGM2NjkxM2Y5YTExZGQzNzRlYTlhNGEyOGVkNWJhNTliYzZiNjBhZCIsImhvc3RuYW1lIjoiZmFsbGJhY2stY29yZS1vcmlnaW4uc3BlZWRjZG5qcy5jb20iLCJhcHBfc2Vzc2lvbl9oYXNoIjoiZjZjOTFlMDFmZGM4ODVlOTJhYzRkNzBlN2M0YjMwMDk5NGYxYWIwM2ZhY2FkYjY1YTE1MTUxZDU4MTA5NmU4NSIsIm5iZiI6MTc1MzI2ODM0OCwiaXNfd2FycCI6ZmFsc2UsImlzX2dhdGV3YXkiOmZhbHNlLCJ0eXBlIjoibWV0YSIsInJlZGlyZWN0X3VybCI6IlwvYWpheFwvbGlic1wvcG9wcGVyLmpzXC8yLjkuNFwvdW1kXC9wb3BwZXIubWluLmpzIiwibXRsc19hdXRoIjp7ImNlcnRfaXNzdWVyX3NraSI6IiIsImNlcnRfcHJlc2VudGVkIjpmYWxzZSwiY2VydF9zZXJpYWwiOiIiLCJjZXJ0X2lzc3Vlcl9kbiI6IiIsImF1dGhfc3RhdHVzIjoiIn0sImF1dGhfc3RhdHVzIjoiIn0.YeXEEQeX3oTXAhmT7WUJKDtsTV8YYmYrJULf-nLV68oMJ8N3rM-t03YxsRya5pa7hFat9b_zSOxL4cIHIcE40krPk79KMBre9FjWu0IGD_lixG9AENtv_YNsQ5onvKrcefRosJiL6ccnAQS6izmTMi9HcxiApJADkkb3IMt9g0tPNxa1HbNSP4ZEbnz2O_lQ4qYC78pFjwLl6wzOmJXPmxkIfme_ZwJu0DEeUaCc9kfgH2A6eea8X6atfpGjZ--QDvcboxyZHw6QCHy6vsH2EQM7S_YLNGnLmc5AgCf80kk166yEHdYZhKB6EU8XMRxP-Hl8RGv7kzQxiCeoqeVrvw">
-    </script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.min.js">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          animation: {
+            'fade-in': 'fadeIn 0.5s ease-in-out',
+            'slide-up': 'slideUp 0.3s ease-out',
+            'pulse-slow': 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+          },
+          keyframes: {
+            fadeIn: {
+              '0%': { opacity: '0' },
+              '100%': { opacity: '1' }
+            },
+            slideUp: {
+              '0%': { transform: 'translateY(10px)', opacity: '0' },
+              '100%': { transform: 'translateY(0)', opacity: '1' }
+            }
+          }
+        }
+      }
+    }
   </script>
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    .glass-effect {
+      backdrop-filter: blur(16px) saturate(180%);
+      background-color: rgba(0, 0, 0, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
 
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" rel="stylesheet">
+    .drag-over {
+      border-color: #6b7280;
+      background-color: rgba(107, 114, 128, 0.1);
+    }
+
+    .file-upload-area {
+      transition: all 0.3s ease;
+    }
+
+    .file-upload-area:hover {
+      border-color: #9ca3af;
+      background-color: rgba(156, 163, 175, 0.05);
+    }
+  </style>
 </head>
 
-<body>
-  <div class="container">
-    <h1 class="mt-5 text-success">GeeksForGeeks File Storage</h1>
+<body class="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-black">
+  <!-- Background Pattern -->
+  <div class="absolute inset-0 bg-gradient-to-br from-gray-900/20 via-gray-800/20 to-gray-900/20 opacity-30"></div>
 
-    <h2 class="mt-4">Upload File</h2>
-    <form action="/upload" method="POST" enctype="multipart/form-data">
-      <div class="mb-3">
-        <input type="file" name="file" class="form-control" required>
+  <div class="relative z-10 container mx-auto px-4 py-8 max-w-6xl">
+    <!-- Header -->
+    <div class="text-center mb-12 animate-fade-in">
+      <div
+        class="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-gray-700 to-gray-900 rounded-2xl mb-6 shadow-xl border border-gray-600">
+        <i class="fas fa-cloud-upload-alt text-2xl text-white"></i>
       </div>
-      <button type="submit" class="btn btn-primary">Upload</button>
-    </form>
+      <h1 class="text-5xl font-bold text-white mb-4">
+        File<span class="text-transparent bg-clip-text bg-gradient-to-r from-gray-300 to-gray-500"> Storage</span>
+      </h1>
+      <p class="text-xl text-gray-300">Mini file management</p>
+    </div>
 
-    <h2 class="mt-4">Delete File</h2>
-    <form id="deleteForm">
-      <div class="mb-3">
-        <select id="fileSelect" name="fileName" class="form-select">
-        </select>
+    <div class="grid lg:grid-cols-2 gap-8">
+      <!-- Upload Section -->
+      <div class="glass-effect rounded-3xl p-8 animate-slide-up">
+        <div class="flex items-center mb-6">
+          <div
+            class="w-10 h-10 bg-gradient-to-r from-gray-600 to-gray-800 rounded-xl flex items-center justify-center mr-4 border border-gray-700">
+            <i class="fas fa-upload text-white"></i>
+          </div>
+          <h2 class="text-2xl font-semibold text-white">Upload Files</h2>
+        </div>
+
+        <form action="http://localhost:5000/upload" method="POST" enctype="multipart/form-data" id="uploadForm">
+          <div class="mb-6">
+            <div
+              class="file-upload-area border-2 border-dashed border-gray-500 rounded-2xl p-8 text-center cursor-pointer"
+              id="dropArea" onclick="document.getElementById('fileInput').click()">
+              <div class="mb-4">
+                <i class="fas fa-cloud-upload-alt text-5xl text-gray-400 mb-4"></i>
+              </div>
+              <p class="text-lg text-gray-300 mb-2">Drop files here or click to browse</p>
+              <p class="text-sm text-gray-400">Maximum file size: 10MB</p>
+              <input type="file" name="file" id="fileInput" class="hidden" required onchange="updateFileName()">
+            </div>
+            <div id="selectedFile" class="mt-4 hidden">
+              <div class="bg-gray-800 rounded-xl p-4 flex items-center justify-between border border-gray-700">
+                <div class="flex items-center">
+                  <i class="fas fa-file text-gray-300 mr-3"></i>
+                  <span class="text-white" id="fileName"></span>
+                </div>
+                <button type="button" onclick="clearSelectedFile()" class="text-red-400 hover:text-red-300">
+                  <i class="fas fa-times"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+          <button type="submit"
+            class="w-full bg-gradient-to-r from-gray-700 to-gray-900 hover:from-gray-600 hover:to-gray-800 text-white font-semibold py-4 px-6 rounded-xl transition-all duration-300 shadow-lg hover:shadow-2xl transform hover:-translate-y-1 border border-gray-600">
+            <i class="fas fa-upload mr-2"></i>
+            Upload File
+          </button>
+        </form>
       </div>
-      <button type="button" class="btn btn-danger" onclick="deleteFile()">Delete</button>
-    </form>
 
-    <h2 class="mt-4">Uploaded Files</h2>
-    <ul id="fileList" class="list-group">
-    </ul>
+      <!-- Delete Section -->
+      <div class="glass-effect rounded-3xl p-8 animate-slide-up" style="animation-delay: 0.1s">
+        <div class="flex items-center mb-6">
+          <div
+            class="w-10 h-10 bg-gradient-to-r from-red-600 to-red-800 rounded-xl flex items-center justify-center mr-4 border border-red-700">
+            <i class="fas fa-trash-alt text-white"></i>
+          </div>
+          <h2 class="text-2xl font-semibold text-white">Delete Files</h2>
+        </div>
+
+        <form id="deleteForm">
+          <div class="mb-6">
+            <select id="fileSelect" name="fileName"
+              class="w-full bg-gray-800 text-white border border-gray-600 rounded-xl px-4 py-4 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-gray-400 transition-all duration-300">
+              <option value="" class="text-gray-400">Select a file to delete...</option>
+            </select>
+          </div>
+          <button type="button" onclick="deleteFile()"
+            class="w-full bg-gradient-to-r from-red-600 to-red-800 hover:from-red-500 hover:to-red-700 text-white font-semibold py-4 px-6 rounded-xl transition-all duration-300 shadow-lg hover:shadow-2xl transform hover:-translate-y-1 disabled:opacity-50 disabled:cursor-not-allowed border border-red-700"
+            id="deleteBtn">
+            <i class="fas fa-trash-alt mr-2"></i>
+            Delete File
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Files Section -->
+    <div class="glass-effect rounded-3xl p-8 mt-8 animate-slide-up" style="animation-delay: 0.2s">
+      <div class="flex items-center justify-between mb-8">
+        <div class="flex items-center">
+          <div
+            class="w-10 h-10 bg-gradient-to-r from-gray-600 to-gray-800 rounded-xl flex items-center justify-center mr-4 border border-gray-700">
+            <i class="fas fa-folder-open text-white"></i>
+          </div>
+          <h2 class="text-2xl font-semibold text-white">Your Files</h2>
+        </div>
+        <button onclick="refreshFiles()"
+          class="bg-gray-800 hover:bg-gray-700 text-gray-300 hover:text-white px-4 py-2 rounded-lg transition-all duration-300 border border-gray-600">
+          <i class="fas fa-sync-alt mr-2"></i>
+          Refresh
+        </button>
+      </div>
+
+      <div id="loadingSpinner" class="text-center py-12 hidden">
+        <div class="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-gray-400"></div>
+        <p class="text-gray-400 mt-4">Loading files...</p>
+      </div>
+
+      <div id="fileList" class="space-y-4">
+        <!-- Files will be populated here -->
+      </div>
+    </div>
   </div>
 
-
+  <!-- Toast Notification -->
+  <div id="toast" class="fixed top-6 right-6 z-50 hidden">
+    <div class="glass-effect rounded-xl p-4 shadow-2xl border border-slate-600">
+      <div class="flex items-center">
+        <div id="toastIcon" class="mr-3"></div>
+        <div>
+          <p id="toastTitle" class="font-semibold text-white"></p>
+          <p id="toastMessage" class="text-sm text-gray-300"></p>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <script>
+    let isLoading = false;
+
+    // Drag and Drop functionality
+    const dropArea = document.getElementById('dropArea');
+    const fileInput = document.getElementById('fileInput');
+
+    ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+      dropArea.addEventListener(eventName, preventDefaults, false);
+    });
+
+    function preventDefaults(e) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+
+    ['dragenter', 'dragover'].forEach(eventName => {
+      dropArea.addEventListener(eventName, highlight, false);
+    });
+
+    ['dragleave', 'drop'].forEach(eventName => {
+      dropArea.addEventListener(eventName, unhighlight, false);
+    });
+
+    function highlight() {
+      dropArea.classList.add('drag-over');
+    }
+
+    function unhighlight() {
+      dropArea.classList.remove('drag-over');
+    }
+
+    dropArea.addEventListener('drop', handleDrop, false);
+
+    function handleDrop(e) {
+      const dt = e.dataTransfer;
+      const files = dt.files;
+
+      if (files.length > 0) {
+        fileInput.files = files;
+        updateFileName();
+      }
+    }
+
+    function updateFileName() {
+      const fileInput = document.getElementById('fileInput');
+      const selectedFileDiv = document.getElementById('selectedFile');
+      const fileNameSpan = document.getElementById('fileName');
+
+      if (fileInput.files.length > 0) {
+        const file = fileInput.files[0];
+        fileNameSpan.textContent = file.name;
+        selectedFileDiv.classList.remove('hidden');
+      }
+    }
+
+    function clearSelectedFile() {
+      const fileInput = document.getElementById('fileInput');
+      const selectedFileDiv = document.getElementById('selectedFile');
+
+      fileInput.value = '';
+      selectedFileDiv.classList.add('hidden');
+    }
+
+    function showToast(title, message, type = 'info') {
+      const toast = document.getElementById('toast');
+      const toastIcon = document.getElementById('toastIcon');
+      const toastTitle = document.getElementById('toastTitle');
+      const toastMessage = document.getElementById('toastMessage');
+
+      const icons = {
+        success: '<i class="fas fa-check-circle text-green-400 text-xl"></i>',
+        error: '<i class="fas fa-exclamation-circle text-red-400 text-xl"></i>',
+        info: '<i class="fas fa-info-circle text-blue-400 text-xl"></i>',
+        warning: '<i class="fas fa-exclamation-triangle text-yellow-400 text-xl"></i>'
+      };
+
+      toastIcon.innerHTML = icons[type];
+      toastTitle.textContent = title;
+      toastMessage.textContent = message;
+
+      toast.classList.remove('hidden');
+      toast.classList.add('animate-slide-up');
+
+      setTimeout(() => {
+        toast.classList.add('hidden');
+      }, 4000);
+    }
+
+    function setLoading(loading) {
+      isLoading = loading;
+      const spinner = document.getElementById('loadingSpinner');
+      const fileList = document.getElementById('fileList');
+
+      if (loading) {
+        spinner.classList.remove('hidden');
+        fileList.style.opacity = '0.5';
+      } else {
+        spinner.classList.add('hidden');
+        fileList.style.opacity = '1';
+      }
+    }
+
     function populateFileListWithIcons() {
-      fetch('/view')
+      if (isLoading) return;
+
+      setLoading(true);
+
+      fetch('http://localhost:5000/view')
         .then(response => response.json())
         .then(data => {
           const fileList = document.getElementById('fileList');
           fileList.innerHTML = '';
 
-          data.files.forEach(fileName => {
-            const listItem = document.createElement('li');
-            listItem.className = 'list-group-item d-flex justify-content-between align-items-center';
+          if (data.files.length === 0) {
+            fileList.innerHTML = `
+              <div class="text-center py-12">
+                <i class="fas fa-folder-open text-6xl text-gray-500 mb-4"></i>
+                <p class="text-gray-400 text-lg">No files uploaded yet</p>
+                <p class="text-gray-500 text-sm">Upload your first file to get started</p>
+              </div>
+            `;
+            return;
+          }
 
+          data.files.forEach((fileName, index) => {
             const fileExtension = fileName.split('.').pop();
+            const fileSize = '-- KB';
 
-            const iconSpan = document.createElement('span');
-            iconSpan.className = 'me-3';
-            iconSpan.innerHTML = getFileIconHTML(fileExtension);
+            const fileItem = document.createElement('div');
+            fileItem.className = 'bg-gray-800 hover:bg-gray-700 rounded-xl p-4 transition-all duration-300 hover:shadow-lg hover:-translate-y-1 border border-gray-700';
+            fileItem.style.animationDelay = `${index * 0.05}s`;
+            fileItem.classList.add('animate-slide-up');
 
-            const fileLink = document.createElement('a');
-            fileLink.href = `/uploads/${fileName}`;
-            fileLink.textContent = fileName;
+            fileItem.innerHTML = `
+              <div class="flex items-center justify-between">
+                <div class="flex items-center flex-1 min-w-0">
+                  <div class="flex-shrink-0 mr-4">
+                    ${getFileIconHTML(fileExtension)}
+                  </div>
+                  <div class="flex-1 min-w-0">
+                    <a href="http://localhost:5000/uploads/${fileName}" 
+                       target="_blank" 
+                       class="text-white hover:text-gray-300 font-medium truncate block transition-colors duration-200">
+                      ${fileName}
+                    </a>
+                    <p class="text-gray-400 text-sm">${getFileTypeLabel(fileExtension)} • ${fileSize}</p>
+                  </div>
+                </div>
+                <div class="flex items-center space-x-2 flex-shrink-0 ml-4">
+                  <button onclick="downloadFile('${fileName}')" 
+                          class="bg-gray-600 hover:bg-gray-500 text-white p-2 rounded-lg transition-all duration-200">
+                    <i class="fas fa-download text-sm"></i>
+                  </button>
+                  <button onclick="quickDelete('${fileName}')" 
+                          class="bg-red-600 hover:bg-red-500 text-white p-2 rounded-lg transition-all duration-200">
+                    <i class="fas fa-trash text-sm"></i>
+                  </button>
+                </div>
+              </div>
+            `;
 
-            listItem.appendChild(iconSpan);
-            listItem.appendChild(fileLink);
-
-            fileList.appendChild(listItem);
+            fileList.appendChild(fileItem);
           });
         })
-        .catch(error => console.error(error));
+        .catch(error => {
+          console.error('Error fetching files:', error);
+          showToast('Error', 'Failed to load files. Please try again.', 'error');
+          const fileList = document.getElementById('fileList');
+          fileList.innerHTML = `
+            <div class="text-center py-12">
+              <i class="fas fa-exclamation-triangle text-6xl text-red-400 mb-4"></i>
+              <p class="text-red-400 text-lg">Error loading files</p>
+              <button onclick="refreshFiles()" class="mt-4 bg-red-600 hover:bg-red-500 text-white px-4 py-2 rounded-lg transition-all duration-200">
+                Try Again
+              </button>
+            </div>
+          `;
+        })
+        .finally(() => {
+          setLoading(false);
+        });
     }
 
     function getFileIconHTML(fileExtension) {
       const iconClasses = {
-        pdf: 'far fa-file-pdf',
-        doc: 'far fa-file-word',
-        docx: 'far fa-file-word',
-        xls: 'far fa-file-excel',
-        xlsx: 'far fa-file-excel',
-        ppt: 'far fa-file-powerpoint',
-        pptx: 'far fa-file-powerpoint',
-        txt: 'far fa-file-alt',
-        jpg: 'far fa-file-image',
-        jpeg: 'far fa-file-image',
-        png: 'far fa-file-image',
-        gif: 'far fa-file-image',
-        default: 'far fa-file'
+        pdf: 'fas fa-file-pdf text-3xl text-red-400',
+        doc: 'fas fa-file-word text-3xl text-blue-400',
+        docx: 'fas fa-file-word text-3xl text-blue-400',
+        xls: 'fas fa-file-excel text-3xl text-green-400',
+        xlsx: 'fas fa-file-excel text-3xl text-green-400',
+        ppt: 'fas fa-file-powerpoint text-3xl text-orange-400',
+        pptx: 'fas fa-file-powerpoint text-3xl text-orange-400',
+        txt: 'fas fa-file-alt text-3xl text-gray-300',
+        jpg: 'fas fa-file-image text-3xl text-purple-400',
+        jpeg: 'fas fa-file-image text-3xl text-purple-400',
+        png: 'fas fa-file-image text-3xl text-purple-400',
+        gif: 'fas fa-file-image text-3xl text-purple-400',
+        zip: 'fas fa-file-archive text-3xl text-yellow-400',
+        rar: 'fas fa-file-archive text-3xl text-yellow-400',
+        mp4: 'fas fa-file-video text-3xl text-indigo-400',
+        mp3: 'fas fa-file-audio text-3xl text-green-400',
+        default: 'fas fa-file text-3xl text-gray-400'
       };
 
-      return `<i class="${iconClasses[fileExtension.toLowerCase()] || iconClasses['default']}">
-      </i>`;
+      const iconClass = iconClasses[fileExtension.toLowerCase()] || iconClasses['default'];
+      return `<i class="${iconClass}"></i>`;
     }
 
-    function deleteFile() {
-      const deleteForm = document.getElementById('deleteForm');
-      const formData = new FormData(deleteForm);
+    function getFileTypeLabel(fileExtension) {
+      const typeLabels = {
+        pdf: 'PDF Document',
+        doc: 'Word Document',
+        docx: 'Word Document',
+        xls: 'Excel Spreadsheet',
+        xlsx: 'Excel Spreadsheet',
+        ppt: 'PowerPoint Presentation',
+        pptx: 'PowerPoint Presentation',
+        txt: 'Text File',
+        jpg: 'Image',
+        jpeg: 'Image',
+        png: 'Image',
+        gif: 'Image',
+        zip: 'Archive',
+        rar: 'Archive',
+        mp4: 'Video',
+        mp3: 'Audio',
+        default: 'File'
+      };
 
-      fetch(`/delete/${formData.get('fileName')}`, {
+      return typeLabels[fileExtension.toLowerCase()] || typeLabels['default'];
+    }
+
+    function downloadFile(fileName) {
+      const link = document.createElement('a');
+      link.href = `http://localhost:5000/uploads/${fileName}`;
+      link.download = fileName;
+      link.click();
+    }
+
+    function quickDelete(fileName) {
+      if (!confirm(`Are you sure you want to delete "${fileName}"?`)) {
+        return;
+      }
+
+      fetch(`http://localhost:5000/delete/${encodeURIComponent(fileName)}`, {
         method: 'DELETE',
       })
         .then(response => response.text())
         .then(message => {
-          alert(message);
+          showToast('Success', `File "${fileName}" has been deleted.`, 'success');
           populateFileListWithIcons();
           populateDeleteOptions();
         })
-        .catch(error => console.error(error));
+        .catch(error => {
+          console.error('Error deleting file:', error);
+          showToast('Error', 'Failed to delete file. Please try again.', 'error');
+        });
+    }
+
+    function deleteFile() {
+      const fileSelect = document.getElementById('fileSelect');
+      const fileName = fileSelect.value;
+
+      if (!fileName) {
+        showToast('Warning', 'Please select a file to delete.', 'warning');
+        return;
+      }
+
+      quickDelete(fileName);
     }
 
     function populateDeleteOptions() {
-      fetch('/view')
+      fetch('http://localhost:5000/view')
         .then(response => response.json())
         .then(data => {
           const fileSelect = document.getElementById('fileSelect');
-          fileSelect.innerHTML = '';
+          fileSelect.innerHTML = '<option value="" class="text-slate-400">Select a file to delete...</option>';
+
           data.files.forEach(fileName => {
             const option = document.createElement('option');
             option.value = fileName;
             option.textContent = fileName;
+            option.className = 'text-white bg-gray-800';
             fileSelect.appendChild(option);
           });
         })
-        .catch(error => console.error(error));
+        .catch(error => {
+          console.error('Error fetching files for delete options:', error);
+        });
     }
 
-    populateFileListWithIcons();
-    populateDeleteOptions();
+    function refreshFiles() {
+      populateFileListWithIcons();
+      populateDeleteOptions();
+      showToast('Info', 'Files refreshed successfully.', 'info');
+    }
+
+    // Form submission handling
+    document.getElementById('uploadForm').addEventListener('submit', function (e) {
+      const fileInput = document.getElementById('fileInput');
+      if (!fileInput.files.length) {
+        e.preventDefault();
+        showToast('Warning', 'Please select a file to upload.', 'warning');
+        return;
+      }
+
+      showToast('Info', 'Uploading file...', 'info');
+    });
+
+    // Initialize on page load
+    document.addEventListener('DOMContentLoaded', function () {
+      populateFileListWithIcons();
+      populateDeleteOptions();
+    });
   </script>
 </body>
 
