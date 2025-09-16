@@ -482,15 +482,26 @@
     }
 
     // Form submission handling
-    document.getElementById('uploadForm').addEventListener('submit', function (e) {
+    document.getElementById('uploadForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
       const fileInput = document.getElementById('fileInput');
-      if (!fileInput.files.length) {
-        e.preventDefault();
-        showToast('Warning', 'Please select a file to upload.', 'warning');
-        return;
-      }
+      if (!fileInput.files.length) return;
 
-      showToast('Info', 'Uploading file...', 'info');
+      const formData = new FormData();
+      formData.append('file', fileInput.files[0]);
+      try {
+        const res = await fetch('https://sfu-backend.onrender.com/upload', {
+          method: 'POST',
+          body: formData
+        });
+        const data = await res.json();
+        showToast('Success', `Uploaded ${data.filename}`, 'success');
+        populateFileListWithIcons();
+        populateDeleteOptions();
+      } catch (err) {
+        console.error(err);
+        showToast('Error', 'Upload failed.', 'error');
+      }
     });
 
     // Initialize on page load
