@@ -43,32 +43,5 @@ A simple React application for uploading a single file to a backend server built
 
 3. Check the newly created backend storage folder, filestorage, or response for the uploaded file.
 
-## Project Structure
-  ```pgsql
-    single/
-    ├── public/
-    │   ├── favicon.ico
-    │   └── folder.png
-    │   └── index.html
-    │   └── logo192.png
-    │   └── logo512.png
-    │   └── manifest.json
-    │   └── robots.txt
-    │   └── test.html
-    ├── src/
-    │   ├── App.css
-    │   └── App.js
-    │   └── App.test.js
-    │   └── index.css
-    │   └── index.js
-    │   └── logo.svg
-    │   └── reportWebVitals.js
-    │   └── setupTests.js
-    └── .gitignore
-    └── package.json
-    └── package-lock.json
-    └── README.md
-```
-
 ## Backend Integration
 Pair this frontend with the [Express/Multer](https://github.com/rendznicoy/sfu-backend) backend server to handle uploads, deletions, and file viewing.
