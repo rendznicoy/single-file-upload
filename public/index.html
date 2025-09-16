@@ -82,7 +82,8 @@
           <h2 class="text-2xl font-semibold text-white">Upload Files</h2>
         </div>
 
-        <form action="http://localhost:5000/upload" method="POST" enctype="multipart/form-data" id="uploadForm">
+        <form action="https://sfu-backend.onrender.com/upload" method="POST" enctype="multipart/form-data"
+          id="uploadForm">
           <div class="mb-6">
             <div
               class="file-upload-area border-2 border-dashed border-gray-500 rounded-2xl p-8 text-center cursor-pointer"
@@ -290,7 +291,7 @@
 
       setLoading(true);
 
-      fetch('http://localhost:5000/view')
+      fetch('https://sfu-backend.onrender.com/view')
         .then(response => response.json())
         .then(data => {
           const fileList = document.getElementById('fileList');
@@ -323,7 +324,7 @@
                     ${getFileIconHTML(fileExtension)}
                   </div>
                   <div class="flex-1 min-w-0">
-                    <a href="http://localhost:5000/uploads/${fileName}" 
+                    <a href="https://sfu-backend.onrender.com/uploads/${fileName}" 
                        target="_blank" 
                        class="text-white hover:text-gray-300 font-medium truncate block transition-colors duration-200">
                       ${fileName}
@@ -417,7 +418,7 @@
 
     function downloadFile(fileName) {
       const link = document.createElement('a');
-      link.href = `http://localhost:5000/uploads/${fileName}`;
+      link.href = `https://sfu-backend.onrender.com/uploads/${fileName}`;
       link.download = fileName;
       link.click();
     }
@@ -427,7 +428,7 @@
         return;
       }
 
-      fetch(`http://localhost:5000/delete/${encodeURIComponent(fileName)}`, {
+      fetch(`https://sfu-backend.onrender.com/delete/${encodeURIComponent(fileName)}`, {
         method: 'DELETE',
       })
         .then(response => response.text())
@@ -455,7 +456,7 @@
     }
 
     function populateDeleteOptions() {
-      fetch('http://localhost:5000/view')
+      fetch('https://sfu-backend.onrender.com/view')
         .then(response => response.json())
         .then(data => {
           const fileSelect = document.getElementById('fileSelect');
